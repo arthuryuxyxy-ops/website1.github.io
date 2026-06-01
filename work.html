@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Individual Traceability System v1.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* ===== Global ===== */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0b0b0b;
+      font-family: "SimSun", "Courier New", monospace;
+      color: #c9c9c9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== Terminal Shell ===== */
+    .terminal {
+      width: 820px;
+      height: 520px;
+      border: 1px solid #333;
+      box-shadow: 0 0 30px rgba(0, 255, 120, 0.08);
+      background: radial-gradient(circle at top, #111, #0a0a0a);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== Title Bar ===== */
+    .header {
+      background: #1a1a1a;
+      padding: 6px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ===== Screen Area ===== */
+    .screen {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* ===== Input Area ===== */
+    .input-line {
+      display: flex;
+      border-top: 1px solid #333;
+      padding: 10px;
+      background: #0f0f0f;
+    }
+
+    .input-line input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #c9c9c9;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .prompt {
+      color: #00cc66;
+      margin-right: 6px;
+    }
+
+    /* ===== Status Light ===== */
+    .status {
+      color: #ff4444;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1 }
+      51%, 100% { opacity: 0.3 }
+    }
+
+    /* ===== Tags ===== */
+    .tag {
+      display: inline-block;
+      border: 1px solid #555;
+      padding: 2px 6px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-top: 6px;
+      color: #999;
+    }
+
+    /* ===== Scrollbar ===== */
+    ::-webkit-scrollbar { width: 6px }
+    ::-webkit-scrollbar-track { background: #0a0a0a }
+    ::-webkit-scrollbar-thumb { background: #333 }
+  </style>
+</head>
+
+<body>
+
+<div class="terminal">
+  <!-- Title Bar -->
+  <div class="header">
+    <span>📦 Individual Traceability System &nbsp;|&nbsp; Batch: 2025‑11‑18</span>
+    <span class="status">● Monitoring</span>
+  </div>
+
+  <!-- Screen -->
+  <div class="screen" id="screen">
+    <div>&gt; System initialization complete</div>
+    <div>&gt; Reading individual ID: 250118</div>
+    <div>&gt; Loading growth trajectory...</div>
+    <br>
+    <div>Age 3 —— English Enlightenment · Completed ✅</div>
+    <div>Age 6 —— Social Assessment · Barely Passed ✅</div>
+    <div>Age 9 —— Math Olympiad Screening · Not Qualified ❌</div>
+    <div>Age 12 —— Psychological Stress Threshold · Near Limit ⚠️</div>
+    <br>
+    <div>Please enter your honest evaluation of this system:</div>
+    <div>(e.g.: I don't want to socialize / I am exhausted / I am not excellent)</div>
+    <br>
+  </div>
+
+  <!-- Input -->
+  <div class="input-line">
+    <span class="prompt">&gt;</span>
+    <input id="input" type="text" placeholder="Type here..." autofocus />
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById("input");
+  const screen = document.getElementById("screen");
+
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      const value = input.value.trim();
+      if (!value) return;
+
+      appendLine("> " + value);
+      input.value = "";
+
+      setTimeout(() => {
+        appendLine("> Content submitted for review...");
+      }, 600);
+
+      setTimeout(() => {
+        appendLine("> Non-standard expressions detected");
+        appendLine("> Generating standardized version for you...");
+      }, 1600);
+
+      setTimeout(() => {
+        appendLine("<div class='tag'>Standard Output</div>");
+        appendLine("\"I will actively integrate into the group, love life, and proactively improve myself.\"");
+        appendLine("");
+        appendLine("<div class='tag'>System Suggestion</div>");
+        appendLine("Please continue to maintain a quantifiable, manageable, and assessable growth status.");
+        appendLine("");
+        appendLine("> Record archived.");
+        appendLine("> This window will reset in 10 seconds.");
+      }, 3000);
+
+      setTimeout(() => {
+        location.reload();
+      }, 12000);
+    }
+  });
+
+  function appendLine(html) {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    screen.appendChild(div);
+    screen.scrollTop = screen.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
